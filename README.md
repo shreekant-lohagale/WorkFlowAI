@@ -63,3 +63,25 @@ Relative storage paths resolve from the project root. Storage locations are cont
 ## Persistent Storage
 
 Company Knowledge and productivity analytics use local persistent storage. ChromaDB and `productivity.csv` require a persistent volume if those records must survive cloud redeployments. On platforms with ephemeral filesystems, WorkFlowAI starts safely with an empty Chroma collection and a header-only productivity CSV, but locally written data may be lost on redeployment.
+
+## Railway Backend Deployment
+
+Deploy the repository root as a backend-only Railway service. The included Railway configuration installs only the Python backend dependencies and starts FastAPI using Railway's assigned port.
+
+- Build command: `pip install -r backend/requirements.txt`
+- Start command: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+- Health check: `/api/health`
+- Railway volume mount: `/data`
+
+Configure these production variables in Railway:
+
+```env
+GROQ_API_KEY=<configured in Railway>
+GROQ_MODEL=openai/gpt-oss-20b
+ENVIRONMENT=production
+ALLOWED_ORIGINS=https://your-frontend-domain.example
+CHROMA_PATH=/data/chroma
+PRODUCTIVITY_CSV_PATH=/data/productivity.csv
+```
+
+Only `/data` is intended for runtime-persistent WorkFlowAI data. Company Knowledge is stored at `/data/chroma`, and productivity analytics are stored at `/data/productivity.csv`. Mount the Railway volume before writing production data. Replace the example CORS origin with the deployed React frontend URL; local development continues to default to `http://localhost:5173`.
