@@ -1,0 +1,9 @@
+FICTIONAL DEMO DOCUMENT
+
+Project Delivery Standard Operating Procedure
+
+A project blocker that remains unresolved for more than two working days should be escalated to the project lead.
+
+Critical client-facing blockers should be communicated to the client contact after internal review.
+
+Release dates must not be communicated externally until approved by the project manager.

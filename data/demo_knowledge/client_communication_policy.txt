@@ -1,0 +1,9 @@
+FICTIONAL DEMO DOCUMENT
+
+Client Communication Policy
+
+Client communication involving schedule changes must be reviewed by the project manager.
+
+Employees must not promise unapproved delivery dates.
+
+Confirmed project blockers should be communicated clearly along with their impact and next action.
